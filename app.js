@@ -112,8 +112,6 @@ next.addEventListener('click', e => {
 })
 
 
-
-
 // let arr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 // let shuffled = [...arr].sort(() => Math.random() - 0.5)
 // let namesNew = [...names].sort(() => Math.random() - 0.5)
