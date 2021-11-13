@@ -1,0 +1,9 @@
+button {
+    margin: 1rem;
+}
+
+.imgWrapper {
+    width: 700px;
+    height: 450px;
+    background-color: lightgrey;
+}
