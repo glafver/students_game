@@ -7,3 +7,7 @@ button {
     height: 450px;
     background-color: lightgrey;
 }
+
+.imgWrapper p {
+    display: none;
+}

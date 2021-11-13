@@ -33,57 +33,64 @@ const students = [{
 
 ];
 
-let currentStudent = 5;
-
 let next = document.querySelector(".next");
 let studentImg = document.querySelector(".studentImg");
-let imgWrapper = document.querySelector('.imgWrapper')
-let answers = document.querySelectorAll('.answer > button');
+let imgWrapper = document.querySelector('.imgWrapper');
+let final = document.querySelector('.final');
+let answers = document.querySelectorAll('.answers > button');
 let links = students.map(student => student.img);
 let names = students.map(student => student.name);
-let namesShuffled = names.sort(() => Math.random() - 0.5);
 
 let index = 0;
 let score = 0;
 
+// function to create labels for buttons with answers
 let newAnswers = (arr) => {
+    // create empty array
     let namesAnswers = [];
-    namesAnswers.push(studentImg.dataset.name);
+    // fill it with the correct answer
+    namesAnswers.push(names[index]);
     console.log(namesAnswers);
-    for (let i = 0; i < answers.length; i++) {
-        if (arr[i] !== studentImg.dataset.name) {
+    // fill it with the rest of names
+    for (let i = 0; i < arr.length; i++) {
+        if (arr[i] !== names[index]) {
             namesAnswers.push(arr[i]);
         }
     }
-    namesAnswers.sort(() => Math.random() - 0.5);
-    return namesAnswers;
+    // cut array to have just 4 potential answers ans then shuffle it
+    return namesAnswers.slice(0, 4).sort(() => Math.random() - 0.5);
 }
 
 let newStudent = () => {
+    // generate new picture
     studentImg.setAttribute('src', links[index]);
-    studentImg.setAttribute('data-name', names[index]);
-
-    let namesAnswers = newAnswers(namesShuffled);
-    console.log(namesAnswers);
-
+    // shuffle array of names to create random array of names
+    let namesShuffled = [...names].sort(() => Math.random() - 0.5);
+    // call for my function with random names
+    let buttonsAnswers = newAnswers(namesShuffled);
+    console.log(buttonsAnswers);
+    // set names to buttons
     for (let i = 0; i < answers.length; i++) {
-        answers[i].innerText = namesAnswers[i];
+        answers[i].innerText = buttonsAnswers[i];
     }
 
 }
 
+// create my first page
 newStudent();
 
-
+// listener for the buttons with answers
 answers.forEach(button => {
     button.addEventListener('click', e => {
-        if (e.target.innerText == studentImg.dataset.name) {
+        if (e.target.innerText == names[index]) {
+            // if user anwered correctly - upgrade the score
             score++;
         }
+        // show which buttons contained wrong and right answers
         answers.forEach(button => {
             button.classList.remove('btn-light');
-            button.classList.add('btn-danger')
-            if (button.innerText == studentImg.dataset.name) {
+            button.classList.add('btn-danger');
+            if (button.innerText == names[index]) {
                 button.classList.remove('btn-danger');
                 button.classList.add('btn-success');
             }
@@ -91,37 +98,26 @@ answers.forEach(button => {
     })
 })
 
+// listener for the 'next' button
 next.addEventListener('click', e => {
-
-    answers.forEach(button => {
-        button.classList.add('btn-light')
-        button.classList.remove('btn-danger')
-        button.classList.remove('btn-success')
-    })
 
     index++;
 
-    if (index < links.length) {
+    if (index < students.length) {
+        //  revert buton classes
+        answers.forEach(button => {
+            button.classList.add('btn-light');
+            button.classList.remove('btn-danger');
+            button.classList.remove('btn-success');
+        });
+        // creating new student 
         newStudent();
-        // studentImg.setAttribute('src', links[index]);
-        // studentImg.setAttribute('data-name', names[index]);
     } else {
-        imgWrapper.innerText = `You guessed right ${score} times`;
-        studentImg.style.display = 'none'
+        // game ended; showing the final page
+        final.style.display = 'block';
+        final.innerText = `Game ended! You guessed right ${score} times`;
+        studentImg.style.display = 'none';
+        answers.forEach(button => button.style.display = 'none');
+        next.style.display = 'none';
     }
 })
-
-
-// let arr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
-// let shuffled = [...arr].sort(() => Math.random() - 0.5)
-// let namesNew = [...names].sort(() => Math.random() - 0.5)
-
-// // function shuffle(array) {
-// //     array.sort(() => Math.random() - 0.5);
-// // }
-
-// // shuffle(arr);
-// console.log(arr);
-// console.log(shuffled);
-// console.log(names);
-// console.log(namesNew)
