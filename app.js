@@ -14,41 +14,41 @@ const students = [{
         name: "Pippi",
         img: "img/5.jpg",
     },
-    //  {
-    //     name: "Catti",
-    //     img: "img/6.jpg",
-    // }, {
-    //     name: "Lizzy",
-    //     img: "img/7.jpg",
-    // }, {
-    //     name: "Dolly",
-    //     img: "img/8.jpg",
-    // }, {
-    //     name: "Molly",
-    //     img: "img/9.jpg",
-    // }, {
-    //     name: "Polly",
-    //     img: "img/10.jpg",
-    // }
+     {
+        name: "Catti",
+        img: "img/6.jpg",
+    }, {
+        name: "Lizzy",
+        img: "img/7.jpg",
+    }, {
+        name: "Dolly",
+        img: "img/8.jpg",
+    }, {
+        name: "Molly",
+        img: "img/9.jpg",
+    }, {
+        name: "Polly",
+        img: "img/10.jpg",
+    }
 ];
 
-let next = document.querySelector(".next");
-let studentImg = document.querySelector(".studentImg");
-let imgWrapper = document.querySelector('.imgWrapper');
+let next = document.querySelector("#next");
+let again = document.querySelector("#again");
+let studentImg = document.querySelector("#studentImg");
+let imgWrapper = document.querySelector('#imgWrapper');
 let answersTable = document.querySelector('#answersTable');
-let final = document.querySelector('.final');
-let answers = document.querySelectorAll('.answers > button');
-let studentsNew = [...students].sort(() => Math.random() - 0.5);
-let links = studentsNew.map(student => student.img);
-let names = studentsNew.map(student => student.name);
-console.log('names are', names)
+let final = document.querySelector('#final');
+let answers = document.querySelectorAll('#answers > button');
 
-let index = 0;
-let score = 0;
-let userAnswers = [];
+let studentsNew = [...students].sort(() => Math.random() - 0.5);;
+let links = studentsNew.map(student => student.img);;
+let names = studentsNew.map(student => student.name);;
+let index = 0;;
+let score = 0;;
+let highscore = false;
+let userAnswers = [];;
 // we need to check if answer is given to avoid score bug
-let answerGiven = false;
-
+let answerGiven = false;;
 
 let newStudent = () => {
     // generate new picture
@@ -104,11 +104,15 @@ answers.forEach(button => {
 
 // listener for the 'next' button
 next.addEventListener('click', e => {
-    answerGiven = false;
+    // prevent avoiding to give an answer
+    if (answerGiven == false) {
+        alert('You need to choose the answer!');
+    } else {
+           answerGiven = false;
     index++;
 
     if (index < students.length) {
-        //  revert buton classes
+        //  revert buttons classes
         answers.forEach(button => {
             button.classList.add('btn-light');
             button.classList.remove('btn-danger');
@@ -118,7 +122,7 @@ next.addEventListener('click', e => {
         newStudent();
     } else {
         // game ended; showing the final page
-        answersTable.parentElement.style.display = 'block';
+        answersTable.parentElement.classList.toggle('d-none');
         for (let i = 0; i < names.length; i ++) {
             let tdClass = userAnswers[i] == names[i] ? 'right' : 'wrong';
             answersTable.innerHTML += 
@@ -128,11 +132,56 @@ next.addEventListener('click', e => {
             <td>${names[i]}</td>
             </tr>`
         };
-
-        final.style.display = 'block';
-        final.innerText = `Game ended! You guessed right ${score}/${names.length} times.`;
-        studentImg.style.display = 'none';
+        // setting a highscore        
+        final.classList.toggle('d-none');
+        final.innerHTML += 
+            `<p>Game ended! You guessed right ${score}/${names.length} times.</p>`
+        // highscore logic
+        if (highscore) {
+            if (score > highscore) {
+                highscore = score;
+                final.innerHTML += `<p>Good job! Your new highscore is ${highscore}/${names.length}. </p>`;
+            } else {
+                final.innerHTML += 
+                `<p>Sorry, no new highscore. Your previous best result was ${highscore}/${names.length}.</p>`;
+            } 
+        } else {
+            highscore = score;
+            final.innerHTML += `<p>Good job! Your new highscore is ${highscore}/${names.length}. </p>`;
+        };
+        // hiding unnessesary elements
         answers.forEach(button => button.style.display = 'none');
-        next.style.display = 'none';
+        studentImg.classList.toggle('d-none');
+        next.classList.toggle('d-none');
+        again.classList.toggle('d-none');
+    } 
     }
+
+})
+
+// starting a new game
+again.addEventListener('click', e => {
+    
+    studentsNew = [...students].sort(() => Math.random() - 0.5);
+    links = studentsNew.map(student => student.img);
+    names = studentsNew.map(student => student.name);
+    index = 0;
+    score = 0;
+    userAnswers = [];
+    answerGiven = false;
+
+    studentImg.classList.toggle('d-none');
+    again.classList.toggle('d-none');
+    next.classList.toggle('d-none');
+    answersTable.parentElement.classList.toggle('d-none');
+    final.classList.toggle('d-none');
+    answers.forEach(button => button.style.display = 'block');
+    final.innerHTML = '';
+    answersTable.innerHTML = '';
+    answers.forEach(button => {
+        button.classList.add('btn-light');
+        button.classList.remove('btn-danger');
+        button.classList.remove('btn-success');
+    });
+    newStudent();
 })

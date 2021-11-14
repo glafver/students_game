@@ -11,12 +11,12 @@
 </head>
 
 <body>
-    <div class="container d-flex flex-column justify-content-center align-center">
+    <div class="container d-flex flex-column justify-content-center align-items-center">
 
-        <div class="imgWrapper container d-flex flex-column justify-content-center align-center">
-            <img alt="" class="studentImg img-fluid">
-            <p class="final text-center"></p>
-            <table class="table">
+        <div class="container d-flex flex-column justify-content-center align-center" id="imgWrapper">
+            <img alt="" class="img-fluid" id="studentImg">
+            <div class="text-center d-none" id="final" ></div>
+            <table class="table d-none mx-auto text-center">
                 <thead>
                 <tr>
                   <th>Picture</th>
@@ -30,12 +30,13 @@
             </table>
         </div>
 
-        <div class="answers d-flex justify-content-center align-center">
+        <div class="d-flex justify-content-center align-center" id="answers">
             <button class="btn btn-light">1</button><button class="btn btn-light">2</button><button class="btn btn-light">3</button><button class="btn btn-light">4</button>
         </div>
 
-        <button class="next btn btn-light">Next</button>
-        
+        <button class="btn btn-light" id="next">Next ➡</button>
+        <button class="btn btn-light d-none" id="again">Want to try one more time?</button>
+
     </div>
 
     <script src="app.js"></script>

@@ -2,22 +2,16 @@ button {
     margin: 1rem;
 }
 
-.imgWrapper {
+#imgWrapper {
     width: 700px;
+    margin-top: 20px;
 }
 
-.imgWrapper p {
-    display: none;
-}
-
-.imgWrapper table {
-    display: none;
+#imgWrapper table {
     width: 70%;
-    text-align: center;
-    margin: auto;
 }
 
-.imgWrapper table img {
+#answersTable img {
     height: 60px;
 }
 
@@ -27,4 +21,8 @@ button {
 
 .wrong {
     color: red;
+}
+
+#next {
+    width: 20%;
 }
