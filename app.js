@@ -13,27 +13,29 @@ const students = [{
     }, {
         name: "Pippi",
         img: "img/5.jpg",
-    }, {
-        name: "Catti",
-        img: "img/6.jpg",
-    }, {
-        name: "Lizzy",
-        img: "img/7.jpg",
-    }, {
-        name: "Dolly",
-        img: "img/8.jpg",
-    }, {
-        name: "Molly",
-        img: "img/9.jpg",
-    }, {
-        name: "Polly",
-        img: "img/10.jpg",
-    }
+    },
+    //  {
+    //     name: "Catti",
+    //     img: "img/6.jpg",
+    // }, {
+    //     name: "Lizzy",
+    //     img: "img/7.jpg",
+    // }, {
+    //     name: "Dolly",
+    //     img: "img/8.jpg",
+    // }, {
+    //     name: "Molly",
+    //     img: "img/9.jpg",
+    // }, {
+    //     name: "Polly",
+    //     img: "img/10.jpg",
+    // }
 ];
 
 let next = document.querySelector(".next");
 let studentImg = document.querySelector(".studentImg");
 let imgWrapper = document.querySelector('.imgWrapper');
+let answersTable = document.querySelector('#answersTable');
 let final = document.querySelector('.final');
 let answers = document.querySelectorAll('.answers > button');
 let studentsNew = [...students].sort(() => Math.random() - 0.5);
@@ -54,13 +56,13 @@ let newStudent = () => {
     // shuffle array of names to create random array of names
     let namesShuffled = [...names].sort(() => Math.random() - 0.5);
     // filter our new array to exclude name with the right answer
-    namesShuffled = namesShuffled
-    .filter(name => name !== names[index]);
+    namesShuffled = namesShuffled.filter(name => name !== names[index]);
     // add the right name to the begining of array
     namesShuffled.unshift(names[index]);
     // cut the 4 possible answers from the array and shuffle them
-    let buttonsAnswers = namesShuffled.slice(0, answers.length)
-    .sort(() => Math.random() - 0.5);
+    let buttonsAnswers = namesShuffled
+        .slice(0, answers.length)
+        .sort(() => Math.random() - 0.5);
     // set possible answers to Answer Buttons
     for (let i = 0; i < answers.length; i++) {
         answers[i].innerText = buttonsAnswers[i];
@@ -76,8 +78,8 @@ newStudent();
 answers.forEach(button => {
     button.addEventListener('click', e => {
         if (answerGiven == false){
-        userAnswers.push(e.target.innerText);
-    console.log('user answers', userAnswers)}
+            userAnswers.push(e.target.innerText);
+            console.log('users answer is', e.target.innerText)}
         // checking correct answer and if the answer is given
         if (e.target.innerText == names[index] && answerGiven == false) {
             // if user anwered correctly - upgrade the score
@@ -116,8 +118,19 @@ next.addEventListener('click', e => {
         newStudent();
     } else {
         // game ended; showing the final page
+        answersTable.parentElement.style.display = 'block';
+        for (let i = 0; i < names.length; i ++) {
+            let tdClass = userAnswers[i] == names[i] ? 'right' : 'wrong';
+            answersTable.innerHTML += 
+            `<tr>
+            <td><img src="${links[i]}"></td>
+            <td class="${tdClass}">${userAnswers[i]}</td>
+            <td>${names[i]}</td>
+            </tr>`
+        };
+
         final.style.display = 'block';
-        final.innerText = `Game ended! You guessed right ${score} times. Rigth answers were ${names.join(', ')}. Your answers were ${userAnswers.join(', ')}`;
+        final.innerText = `Game ended! You guessed right ${score}/${names.length} times.`;
         studentImg.style.display = 'none';
         answers.forEach(button => button.style.display = 'none');
         next.style.display = 'none';

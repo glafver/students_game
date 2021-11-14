@@ -14,18 +14,29 @@
     <div class="container d-flex flex-column justify-content-center align-center">
 
         <div class="imgWrapper container d-flex flex-column justify-content-center align-center">
-            <p class="final text-center"></p>
             <img alt="" class="studentImg img-fluid">
-        </div>
+            <p class="final text-center"></p>
+            <table class="table">
+                <thead>
+                <tr>
+                  <th>Picture</th>
+                  <th>Users answer</th>
+                  <th>Right answer</th>
+                </tr>
+            </thead>
+            <tbody id="answersTable">
 
+            </tbody>
+            </table>
+        </div>
 
         <div class="answers d-flex justify-content-center align-center">
             <button class="btn btn-light">1</button><button class="btn btn-light">2</button><button class="btn btn-light">3</button><button class="btn btn-light">4</button>
         </div>
 
         <button class="next btn btn-light">Next</button>
+        
     </div>
-
 
     <script src="app.js"></script>
 </body>

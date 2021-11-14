@@ -4,10 +4,27 @@ button {
 
 .imgWrapper {
     width: 700px;
-    height: 450px;
-    background-color: lightgrey;
 }
 
 .imgWrapper p {
     display: none;
+}
+
+.imgWrapper table {
+    display: none;
+    width: 70%;
+    text-align: center;
+    margin: auto;
+}
+
+.imgWrapper table img {
+    height: 60px;
+}
+
+.right {
+    color: green;
+}
+
+.wrong {
+    color: red;
 }
