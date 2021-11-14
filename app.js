@@ -39,9 +39,11 @@ let answers = document.querySelectorAll('.answers > button');
 let studentsNew = [...students].sort(() => Math.random() - 0.5);
 let links = studentsNew.map(student => student.img);
 let names = studentsNew.map(student => student.name);
+console.log('names are', names)
 
 let index = 0;
 let score = 0;
+let userAnswers = [];
 // we need to check if answer is given to avoid score bug
 let answerGiven = false;
 
@@ -63,7 +65,7 @@ let newStudent = () => {
     for (let i = 0; i < answers.length; i++) {
         answers[i].innerText = buttonsAnswers[i];
     }
-
+    console.log('right answer is', names[index])
 }
 
 // create my first page
@@ -73,12 +75,15 @@ newStudent();
 
 answers.forEach(button => {
     button.addEventListener('click', e => {
+        if (answerGiven == false){
+        userAnswers.push(e.target.innerText);
+    console.log('user answers', userAnswers)}
         // checking correct answer and if the answer is given
         if (e.target.innerText == names[index] && answerGiven == false) {
             // if user anwered correctly - upgrade the score
             score++;
             answerGiven = true;
-            console.log(score);
+            console.log('score', score);
         } else {
             answerGiven = true;
         }
@@ -112,7 +117,7 @@ next.addEventListener('click', e => {
     } else {
         // game ended; showing the final page
         final.style.display = 'block';
-        final.innerText = `Game ended! You guessed right ${score} times`;
+        final.innerText = `Game ended! You guessed right ${score} times. Rigth answers were ${names.join(', ')}. Your answers were ${userAnswers.join(', ')}`;
         studentImg.style.display = 'none';
         answers.forEach(button => button.style.display = 'none');
         next.style.display = 'none';
