@@ -38,11 +38,14 @@ let studentImg = document.querySelector(".studentImg");
 let imgWrapper = document.querySelector('.imgWrapper');
 let final = document.querySelector('.final');
 let answers = document.querySelectorAll('.answers > button');
-let links = students.map(student => student.img);
-let names = students.map(student => student.name);
+let studentsNew = [...students].sort(() => Math.random() - 0.5);
+let links = studentsNew.map(student => student.img);
+let names = studentsNew.map(student => student.name);
 
 let index = 0;
 let score = 0;
+// we need to check if answer is given to avoid score bug
+let answerGiven = false;
 
 // function to create labels for buttons with answers
 let newAnswers = (arr) => {
@@ -80,11 +83,17 @@ let newStudent = () => {
 newStudent();
 
 // listener for the buttons with answers
+
 answers.forEach(button => {
     button.addEventListener('click', e => {
-        if (e.target.innerText == names[index]) {
+        // checking correct answer and if the answer is given
+        if (e.target.innerText == names[index] && answerGiven == false) {
             // if user anwered correctly - upgrade the score
             score++;
+            answerGiven = true;
+            console.log(score);
+        } else {
+            answerGiven = true;
         }
         // show which buttons contained wrong and right answers
         answers.forEach(button => {
@@ -96,11 +105,12 @@ answers.forEach(button => {
             }
         });
     })
-})
+});
+
 
 // listener for the 'next' button
 next.addEventListener('click', e => {
-
+    answerGiven = false;
     index++;
 
     if (index < students.length) {
