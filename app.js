@@ -1,8 +1,7 @@
 const students = [{
         name: "Kitty",
         img: "img/1.jpg",
-    },
-    {
+    }, {
         name: "Mussy",
         img: "img/2.jpg",
     }, {
@@ -29,8 +28,7 @@ const students = [{
     }, {
         name: "Polly",
         img: "img/10.jpg",
-    },
-
+    }
 ];
 
 let next = document.querySelector(".next");
@@ -47,32 +45,21 @@ let score = 0;
 // we need to check if answer is given to avoid score bug
 let answerGiven = false;
 
-// function to create labels for buttons with answers
-let newAnswers = (arr) => {
-    // create empty array
-    let namesAnswers = [];
-    // fill it with the correct answer
-    namesAnswers.push(names[index]);
-    console.log(namesAnswers);
-    // fill it with the rest of names
-    for (let i = 0; i < arr.length; i++) {
-        if (arr[i] !== names[index]) {
-            namesAnswers.push(arr[i]);
-        }
-    }
-    // cut array to have just 4 potential answers ans then shuffle it
-    return namesAnswers.slice(0, 4).sort(() => Math.random() - 0.5);
-}
 
 let newStudent = () => {
     // generate new picture
     studentImg.setAttribute('src', links[index]);
     // shuffle array of names to create random array of names
     let namesShuffled = [...names].sort(() => Math.random() - 0.5);
-    // call for my function with random names
-    let buttonsAnswers = newAnswers(namesShuffled);
-    console.log(buttonsAnswers);
-    // set names to buttons
+    // filter our new array to exclude name with the right answer
+    namesShuffled = namesShuffled
+    .filter(name => name !== names[index]);
+    // add the right name to the begining of array
+    namesShuffled.unshift(names[index]);
+    // cut the 4 possible answers from the array and shuffle them
+    let buttonsAnswers = namesShuffled.slice(0, answers.length)
+    .sort(() => Math.random() - 0.5);
+    // set possible answers to Answer Buttons
     for (let i = 0; i < answers.length; i++) {
         answers[i].innerText = buttonsAnswers[i];
     }
