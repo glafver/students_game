@@ -91,7 +91,7 @@ answers.forEach(button => {
         }
         // show which buttons contained wrong and right answers
         answers.forEach(button => {
-            button.classList.remove('btn-light');
+            button.classList.remove('btn-outline-dark');
             button.classList.add('btn-danger');
             if (button.innerText == names[index]) {
                 button.classList.remove('btn-danger');
@@ -114,7 +114,7 @@ next.addEventListener('click', e => {
     if (index < students.length) {
         //  revert buttons classes
         answers.forEach(button => {
-            button.classList.add('btn-light');
+            button.classList.add('btn-outline-dark');
             button.classList.remove('btn-danger');
             button.classList.remove('btn-success');
         });
@@ -179,9 +179,10 @@ again.addEventListener('click', e => {
     final.innerHTML = '';
     answersTable.innerHTML = '';
     answers.forEach(button => {
-        button.classList.add('btn-light');
+        button.classList.add('btn-outline-dark');
         button.classList.remove('btn-danger');
         button.classList.remove('btn-success');
     });
     newStudent();
 })
+
