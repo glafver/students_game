@@ -224,66 +224,69 @@ answers.forEach(button => {
                 button.classList.add('btn-success');
             }
         });
+        // show Next button
+        next.classList.remove('d-none');
+        next.classList.add('d-block');
     })
 });
 
 
 // listener for the 'next' button
 next.addEventListener('click', e => {
-    // prevent avoiding to give an answer
-    if (answerGiven == false) {
-        alert('You need to choose the answer!');
-    } else {
-        answerGiven = false;
-        index++;
 
-        if (index < students.length) {
-            //  revert buttons classes
-            answers.forEach(button => {
-                button.classList.add('btn-outline-dark');
-                button.classList.remove('btn-danger');
-                button.classList.remove('btn-success');
-            });
-            // creating new student 
-            newStudent();
-        } else {
-            // game ended; showing the final page
-            answersTable.parentElement.classList.toggle('d-none');
-            for (let i = 0; i < names.length; i++) {
-                let tdClass = userAnswers[i] == names[i] ? 'right' : 'wrong';
-                answersTable.innerHTML +=
-                    `<tr>
+    // hide Next button
+    next.classList.add('d-none');
+    next.classList.remove('d-block');
+
+    index++;
+
+    if (index < students.length) {
+        //  revert buttons classes
+        answers.forEach(button => {
+            button.classList.add('btn-outline-dark');
+            button.classList.remove('btn-danger');
+            button.classList.remove('btn-success');
+        });
+        // creating new student 
+        newStudent();
+    } else {
+        // game ended; showing the final page
+        answersTable.parentElement.classList.toggle('d-none');
+        for (let i = 0; i < names.length; i++) {
+            let tdClass = userAnswers[i] == names[i] ? 'right' : 'wrong';
+            answersTable.innerHTML +=
+                `<tr>
             <td><img src="${links[i]}"></td>
             <td class="${tdClass} align-middle">${userAnswers[i]}</td>
             <td class="align-middle">${names[i]}</td>
             </tr>`
-            };
-            // setting a highscore        
-            final.classList.toggle('d-none');
-            final.innerHTML +=
-                `<p>Game ended! You guessed right ${score}/${names.length} times.</p>`
-                // highscore logic
-            if (highscore) {
-                if (score > highscore) {
-                    highscore = score;
-                    final.innerHTML += `<p>Good job! Your new highscore is ${highscore}/${names.length}. </p>`;
-                } else if (score = highscore) {
-                    final.innerHTML +=
-                        `<p>You reached the end of game! ${highscore}/${names.length} is maximal points! Go and have a break.</p>`;
-                } else {
-                    final.innerHTML +=
-                        `<p>Sorry, no new highscore. Your previous best result was ${highscore}/${names.length}.</p>`;
-                }
-            } else {
+        };
+        // setting a highscore        
+        final.classList.toggle('d-none');
+        final.innerHTML +=
+            `<p>Game ended! You guessed right ${score}/${names.length} times.</p>`
+            // highscore logic
+        if (highscore) {
+            if (score > highscore) {
                 highscore = score;
                 final.innerHTML += `<p>Good job! Your new highscore is ${highscore}/${names.length}. </p>`;
-            };
-            // hiding unnessesary elements
-            answers.forEach(button => button.style.display = 'none');
-            studentImg.classList.toggle('d-none');
-            next.classList.toggle('d-none');
-            again.classList.toggle('d-none');
-        }
+            } else if (score = highscore) {
+                final.innerHTML +=
+                    `<p>You reached the end of game! ${highscore}/${names.length} is maximal points! Go and have a break.</p>`;
+            } else {
+                final.innerHTML +=
+                    `<p>Sorry, no new highscore. Your previous best result was ${highscore}/${names.length}.</p>`;
+            }
+        } else {
+            highscore = score;
+            final.innerHTML += `<p>Good job! Your new highscore is ${highscore}/${names.length}. </p>`;
+        };
+        // hiding unnessesary elements
+        answers.forEach(button => button.style.display = 'none');
+        studentImg.classList.toggle('d-none');
+        next.classList.toggle('d-none');
+        again.classList.toggle('d-none');
+        // }
     }
 
 })
