@@ -204,7 +204,8 @@ answers.forEach(button => {
     button.addEventListener('click', e => {
         if (answerGiven == false) {
             userAnswers.push(e.target.innerText);
-            console.log('users answer is', e.target.innerText)
+            console.log('users answer is', e.target.innerText);
+
         }
         // checking correct answer and if the answer is given
         if (e.target.innerText == names[index] && answerGiven == false) {
@@ -224,9 +225,8 @@ answers.forEach(button => {
                 button.classList.add('btn-success');
             }
         });
-        // show Next button
         next.classList.remove('d-none');
-        next.classList.add('d-block');
+        index++;
     })
 });
 
@@ -234,11 +234,7 @@ answers.forEach(button => {
 // listener for the 'next' button
 next.addEventListener('click', e => {
 
-    // hide Next button
-    next.classList.add('d-none');
-    next.classList.remove('d-block');
-
-    index++;
+    answerGiven = false;
 
     if (index < students.length) {
         //  revert buttons classes
@@ -247,25 +243,29 @@ next.addEventListener('click', e => {
             button.classList.remove('btn-danger');
             button.classList.remove('btn-success');
         });
+
         // creating new student 
         newStudent();
+
     } else {
         // game ended; showing the final page
-        answersTable.parentElement.classList.toggle('d-none');
+        answersTable.parentElement.classList.remove('d-none');
         for (let i = 0; i < names.length; i++) {
             let tdClass = userAnswers[i] == names[i] ? 'right' : 'wrong';
             answersTable.innerHTML +=
                 `<tr>
-            <td><img src="${links[i]}"></td>
+            <td><img class="w-100" src="${links[i]}"></td>
             <td class="${tdClass} align-middle">${userAnswers[i]}</td>
             <td class="align-middle">${names[i]}</td>
             </tr>`
         };
+
         // setting a highscore        
-        final.classList.toggle('d-none');
+        final.classList.remove('d-none');
         final.innerHTML +=
             `<p>Game ended! You guessed right ${score}/${names.length} times.</p>`
-            // highscore logic
+
+        // highscore logic
         if (highscore) {
             if (score > highscore) {
                 highscore = score;
@@ -281,33 +281,32 @@ next.addEventListener('click', e => {
             highscore = score;
             final.innerHTML += `<p>Good job! Your new highscore is ${highscore}/${names.length}. </p>`;
         };
-        // hiding unnessesary elements
+
+        // hiding and showing elements
         answers.forEach(button => button.style.display = 'none');
-        studentImg.classList.toggle('d-none');
-        next.classList.toggle('d-none');
-        again.classList.toggle('d-none');
-        // }
+        studentImg.classList.add('d-none');
+        again.classList.remove('d-none');
     }
 
+    next.classList.add('d-none');
 })
 
 // starting a new game
 again.addEventListener('click', () => {
-
+    console.log(answerGiven);
     studentsNew = [...students].sort(() => Math.random() - 0.5);
-    links = studentsNew.map(student => student.img);
+    links = studentsNew.map(student => student.image);
     names = studentsNew.map(student => student.name);
     index = 0;
     score = 0;
     userAnswers = [];
-    answerGiven = false;
 
-    studentImg.classList.toggle('d-none');
-    again.classList.toggle('d-none');
-    next.classList.toggle('d-none');
-    answersTable.parentElement.classList.toggle('d-none');
-    final.classList.toggle('d-none');
+    studentImg.classList.remove('d-none');
+    again.classList.add('d-none');
+    answersTable.parentElement.classList.add('d-none');
+    final.classList.add('d-none');
     answers.forEach(button => button.style.display = 'block');
+
     final.innerHTML = '';
     answersTable.innerHTML = '';
     answers.forEach(button => {
