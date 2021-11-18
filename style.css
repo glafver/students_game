@@ -1,14 +1,41 @@
 button {
     margin: 0.5rem;
     box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
-    width: 45%;
+    width: 100%;
     height: 4rem;
 }
 
-.right {
-    color: green;
+.tableData {
+    width: 20%;
 }
 
-.wrong {
-    color: red;
+#studentImg {
+    width: 80%;
+}
+
+@media (min-width: 767.98px) {
+    button {
+        width: 45%;
+        height: 3rem;
+    }
+    #studentImg {
+        width: 45%;
+    }
+    .tableData image {
+        width: 60%;
+    }
+}
+
+@media (min-width: 1023.98px) {
+    button {
+        width: 15%;
+        height: 3rem;
+        font-size: 0.7rem !important;
+    }
+    #studentImg {
+        width: 25%;
+    }
+    .tableData img {
+        width: 30%;
+    }
 }
