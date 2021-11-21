@@ -22,11 +22,14 @@ button {
         width: 45%;
     }
     .tableData image {
-        width: 60%;
+        width: 40%;
     }
 }
 
 @media (min-width: 1023.98px) {
+    body {
+        font-size: 0.7rem !important;
+    }
     button {
         width: 15%;
         height: 3rem;
