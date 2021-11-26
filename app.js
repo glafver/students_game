@@ -197,9 +197,8 @@ let newStudent = () => {
     // add the right name to the begining of array
     namesShuffled.unshift(names[index]);
     // cut the 4 possible answers from the array and shuffle them
-    let buttonsAnswers = namesShuffled
-        .slice(0, answers.length)
-        .sort(() => Math.random() - 0.5);
+    let buttonsAnswers = namesShuffled.slice(0, answers.length);
+    shuffleArray(buttonsAnswers);
     // set possible answers to Answer Buttons
     for (let i = 0; i < answers.length; i++) {
         answers[i].innerText = buttonsAnswers[i];
