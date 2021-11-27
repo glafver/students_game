@@ -185,10 +185,10 @@ let index = 0;
 let score = 0;
 let userAnswers = [];
 
-let highscore = false;
+let highscore = 0;
 
 // we need to check if answer is given to avoid the "score bug"
-let answerGiven = false;
+let answerGiven = 0;
 
 let newStudent = () => {
     // generate new picture
@@ -208,8 +208,8 @@ let newStudent = () => {
         answers[i].innerText = buttonsAnswers[i];
     }
     console.log('right answer is', names[index])
-    console.log(students);
-    console.log(studentsNew);
+        // console.log(students);
+        // console.log(studentsNew);
 
 }
 
@@ -264,8 +264,8 @@ next.addEventListener('click', e => {
         newStudent();
 
     } else {
-
-        // constructing table with right answers
+        again.innerText = 'Want to try one more time?'
+            // constructing table with right answers
         for (let i = 0; i < names.length; i++) {
             let tdClass = userAnswers[i] == names[i] ? 'text-success' : 'text-danger';
             answersTable.innerHTML +=
@@ -281,25 +281,25 @@ next.addEventListener('click', e => {
             `<p>Game ended! You guessed right ${score}/${names.length} times.</p>`
 
         // highscore logic
-        if (highscore) {
-            if (score > highscore && score < names.length) {
-                highscore = score;
-                final.innerHTML += `<p>Wow! Your new highscore is ${highscore}/${names.length}. </p>`;
-            } else if (score == names.length) {
-                highscore = score;
-                final.innerHTML +=
-                    `<p>You reached the end of game! ${highscore}/${names.length} is maximal points! You need to restart the game.</p>`;
-            } else {
-                final.innerHTML +=
-                    `<p>Sorry, no new highscore. Your previous best result was ${highscore}/${names.length}.</p>`;
-            }
+
+        if (score > highscore && score < names.length) {
+            highscore = score;
+            final.innerHTML += `<p>Wow! Your new highscore is ${highscore}/${names.length}. </p>`;
+        } else if (score == names.length) {
+            //  nullify highscore = start new game
+            highscore = 0;
+            again.innerText = 'Restart the game'
+            final.innerHTML +=
+                `<p>Congratulation! You earned a maximum amount of points and the game will be restarted.</p>`;
+        } else if (score < highscore) {
+            final.innerHTML +=
+                `<p>Sorry, no new highscore. Your previous best result was ${highscore}/${names.length}.</p>`;
         } else {
-            if (score > 0) {
-                highscore = score;
-                final.innerHTML += `<p>Wow! Your new highscore is ${highscore}/${names.length}. </p>`;
-            }
+            final.innerHTML +=
+                `<p>Sorry, no highscore yet.`
         }
 
+        console.log(score, highscore)
 
         // hiding and showing elements
         imgWrapper.classList.add('d-none');
@@ -328,5 +328,7 @@ again.addEventListener('click', () => {
         button.classList.remove('btn-danger');
         button.classList.remove('btn-success');
     });
+
     newStudent();
+
 })
