@@ -45,7 +45,7 @@ button {
 
 @media (min-width: 767.98px) {
     #studentImg {
-        max-width: 40%;
+        max-width: 60%;
     }
     table {
         width: 75%;
@@ -62,7 +62,7 @@ button {
 
 @media (min-width: 991.98px) {
     #studentImg {
-        max-width: 30%;
+        max-width: 40%;
     }
     #answers {
         width: 70%;
@@ -80,7 +80,7 @@ button {
         width: 15%;
     }
     #studentImg {
-        max-width: 30%;
+        max-width: 40%;
     }
     #answers {
         width: 100%;
@@ -102,7 +102,7 @@ button {
 
 @media (min-width: 1199.98px) {
     #studentImg {
-        max-width: 25%;
+        max-width: 35%;
     }
     table {
         max-width: 75%;

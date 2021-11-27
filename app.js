@@ -165,7 +165,6 @@ const shuffleArray = (array) => {
     }
 };
 
-
 let imgWrapper = document.querySelector('#imgWrapper');
 let studentImg = document.querySelector("#studentImg");
 let answers = document.querySelectorAll('#answers > button');
@@ -188,7 +187,7 @@ let userAnswers = [];
 let highscore = 0;
 
 // we need to check if answer is given to avoid the "score bug"
-let answerGiven = 0;
+let answerGiven = false;
 
 let newStudent = () => {
     // generate new picture
@@ -207,10 +206,6 @@ let newStudent = () => {
     for (let i = 0; i < answers.length; i++) {
         answers[i].innerText = buttonsAnswers[i];
     }
-    console.log('right answer is', names[index])
-        // console.log(students);
-        // console.log(studentsNew);
-
 }
 
 // create my first page
@@ -222,14 +217,12 @@ answers.forEach(button => {
     button.addEventListener('click', e => {
         if (answerGiven == false) {
             userAnswers.push(e.target.innerText);
-            console.log('users answer is', e.target.innerText);
         }
         // checking correct answer and if the answer is given
         if (e.target.innerText == names[index] && answerGiven == false) {
             // if user anwered correctly - upgrade the score
             score++;
             answerGiven = true;
-            console.log('score', score);
         } else {
             answerGiven = true;
         }
@@ -251,18 +244,16 @@ answers.forEach(button => {
 next.addEventListener('click', e => {
     index++;
     answerGiven = false;
+    //  revert buttons classes
+    answers.forEach(button => {
+        button.classList.add('btn-outline-dark');
+        button.classList.remove('btn-danger');
+        button.classList.remove('btn-success');
+    });
 
     if (index < students.length) {
-        //  revert buttons classes
-        answers.forEach(button => {
-            button.classList.add('btn-outline-dark');
-            button.classList.remove('btn-danger');
-            button.classList.remove('btn-success');
-        });
-
         // creating new student 
         newStudent();
-
     } else {
         again.innerText = 'Want to try one more time?'
             // constructing table with right answers
@@ -281,25 +272,22 @@ next.addEventListener('click', e => {
             `<p>Game ended! You guessed right ${score}/${names.length} times.</p>`
 
         // highscore logic
-
         if (score > highscore && score < names.length) {
             highscore = score;
-            final.innerHTML += `<p>Wow! Your new highscore is ${highscore}/${names.length}. </p>`;
+            final.innerHTML += `<p>Wow! Your new highscore is ${highscore}/${names.length}.</p>`;
+        } else if (score < highscore) {
+            final.innerHTML +=
+                `<p>Sorry, no new highscore. Your previous best result was ${highscore}/${names.length}.</p>`;
         } else if (score == names.length) {
             //  nullify highscore = start new game
             highscore = 0;
             again.innerText = 'Restart the game'
             final.innerHTML +=
                 `<p>Congratulation! You earned a maximum amount of points and the game will be restarted.</p>`;
-        } else if (score < highscore) {
+        } else if (highscore == 0) {
             final.innerHTML +=
-                `<p>Sorry, no new highscore. Your previous best result was ${highscore}/${names.length}.</p>`;
-        } else {
-            final.innerHTML +=
-                `<p>Sorry, no highscore yet.`
+                `<p>Sorry, no highscore yet.</p>`
         }
-
-        console.log(score, highscore)
 
         // hiding and showing elements
         imgWrapper.classList.add('d-none');
@@ -317,18 +305,12 @@ again.addEventListener('click', () => {
     index = 0;
     score = 0;
     userAnswers = [];
+    newStudent();
 
     imgWrapper.classList.remove('d-none');
     finalWrapper.classList.add('d-none');
 
     final.innerHTML = '';
     answersTable.innerHTML = '';
-    answers.forEach(button => {
-        button.classList.add('btn-outline-dark');
-        button.classList.remove('btn-danger');
-        button.classList.remove('btn-success');
-    });
-
-    newStudent();
 
 })
