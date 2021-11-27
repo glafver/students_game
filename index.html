@@ -14,9 +14,20 @@
     <div class="d-flex flex-column">
 
         <div class="container d-flex flex-column justify-content-center align-items-center mt-3" id="imgWrapper">
-            <img alt="" class="mb-1 img-fluid" id="studentImg">
-            <div class="text-center d-none" id="final"></div>
-            <table class="table d-none w-75 mx-auto text-center">
+            <h5 class="text-center">Do you remember the name of your classmate?</h5>
+            <img alt="" class="mb-1" id="studentImg">
+
+            <div class="container d-flex flex-row flex-wrap justify-content-center" id="answers">
+                <button class="btn btn-outline-dark">1</button><button class="btn btn-outline-dark">2</button><button class="btn btn-outline-dark">3</button><button class="btn btn-outline-dark">4</button>
+            </div>
+            <div class="container d-flex justify-content-center">
+                <button class="btn btn-outline-dark mt-2 d-none" id="next">Next</button>
+            </div>
+        </div>
+
+        <div class="container d-none d-flex flex-column justify-content-center align-items-center mt-3" id="finalWrapper">
+            <div class="text-center" id="final"></div>
+            <table class="table mx-auto text-center">
                 <thead>
                     <tr>
                         <th>Picture</th>
@@ -28,17 +39,10 @@
 
                 </tbody>
             </table>
+            <div class="container d-flex justify-content-center">
+                <button class="btn btn-outline-dark mb-4" id="again">Want to try one more time?</button>
+            </div>
         </div>
-
-        <div class="container d-flex flex-row flex-wrap justify-content-center" id="answers">
-            <button class="btn btn-outline-dark">1</button><button class="btn btn-outline-dark">2</button><button class="btn btn-outline-dark">3</button><button class="btn btn-outline-dark">4</button>
-        </div>
-        <div class="container d-flex justify-content-center">
-            <button class="btn btn-outline-dark d-none mt-2" id="next">Next</button>
-            <button class="btn btn-outline-dark d-none mb-4" id="again">Want to try one more time?</button>
-        </div>
-
-
     </div>
 
     <script src="app.js"></script>

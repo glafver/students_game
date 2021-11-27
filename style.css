@@ -1,44 +1,108 @@
 button {
     margin: 0.5rem;
     box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
-    width: 45%;
-    height: 2.5rem;
+    width: 44%;
+    height: 3rem;
+    font-size: 0.7rem !important;
+}
+
+#next {
+    width: 44%;
+}
+
+#studentImg {
+    border-radius: 7px;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+    max-width: 50%;
+    height: auto;
+}
+
+#final {
+    background-color: rgba(255, 190, 70, 0.418);
+    border: rgba(255, 190, 70, 0.418) solid 1px;
+    border-radius: 7px;
+    padding: 0.5rem;
+    margin-bottom: 1rem;
+}
+
+#final p {
+    margin: 0.5rem;
 }
 
 .tableData {
     width: 20%;
 }
 
-#studentImg {
-    max-width: 50vh;
+#again {
+    width: 80%;
+    font-size: 0.9rem !important;
 }
 
 @media (min-width: 767.98px) {
-    button {
-        width: 45%;
-        height: 3rem;
-    }
     #studentImg {
-        max-width: 45%;
+        max-width: 40%;
     }
-    .tableData image {
-        width: 40%;
+    table {
+        width: 75%;
+        margin: auto;
+    }
+    .tableData img {
+        width: 65%;
+    }
+    #again {
+        width: 50%;
+        font-size: 1rem !important;
+    }
+}
+
+@media (min-width: 991.98px) {
+    #studentImg {
+        max-width: 30%;
+    }
+    #answers {
+        width: 70%;
+    }
+    table {
+        max-width: 75%;
+    }
+    .tableData img {
+        width: 55%;
     }
 }
 
 @media (min-width: 1023.98px) {
-    body {
-        font-size: 0.7rem !important;
-    }
     button {
         width: 15%;
-        height: 3rem;
-        font-size: 0.7rem !important;
     }
     #studentImg {
-        width: 25%;
+        max-width: 30%;
+    }
+    #answers {
+        width: 100%;
+    }
+    #next {
+        max-width: 30%;
+    }
+    table {
+        max-width: 75%;
     }
     .tableData img {
+        width: 50%;
+    }
+    #again {
         width: 30%;
+        font-size: 1rem !important;
+    }
+}
+
+@media (min-width: 1199.98px) {
+    #studentImg {
+        max-width: 25%;
+    }
+    table {
+        max-width: 75%;
+    }
+    .tableData img {
+        width: 40%;
     }
 }
