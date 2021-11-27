@@ -284,23 +284,23 @@ next.addEventListener('click', e => {
         if (highscore) {
             if (score > highscore && score < names.length) {
                 highscore = score;
-                final.innerHTML += `<p>Good job! Your new highscore is ${highscore}/${names.length}. </p>`;
+                final.innerHTML += `<p>Wow! Your new highscore is ${highscore}/${names.length}. </p>`;
             } else if (score == names.length) {
                 highscore = score;
                 final.innerHTML +=
-                    `<p>You reached the end of game! ${highscore}/${names.length} is maximal points! Go and have a break.</p>`;
+                    `<p>You reached the end of game! ${highscore}/${names.length} is maximal points! You need to restart the game.</p>`;
             } else {
                 final.innerHTML +=
                     `<p>Sorry, no new highscore. Your previous best result was ${highscore}/${names.length}.</p>`;
             }
-        } else if (score == names.length) {
-            highscore = score;
-            final.innerHTML +=
-                `<p>You reached the end of game! ${highscore}/${names.length} is maximal points! Go and have a break.</p>`;
         } else {
-            highscore = score;
-            final.innerHTML += `<p>Good job! Your new highscore is ${highscore}/${names.length}. </p>`;
-        };
+            if (score > 0) {
+                highscore = score;
+                final.innerHTML += `<p>Wow! Your new highscore is ${highscore}/${names.length}. </p>`;
+            }
+        }
+
+
         // hiding and showing elements
         imgWrapper.classList.add('d-none');
         finalWrapper.classList.remove('d-none');
