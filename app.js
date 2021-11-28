@@ -206,7 +206,7 @@ let newStudent = () => {
     for (let i = 0; i < answers.length; i++) {
         answers[i].innerText = buttonsAnswers[i];
     }
-}
+};
 
 // create my first page
 newStudent();
@@ -236,7 +236,7 @@ answers.forEach(button => {
             }
         });
         next.classList.remove('d-none');
-    })
+    });
 });
 
 
@@ -255,8 +255,8 @@ next.addEventListener('click', e => {
         // creating new student 
         newStudent();
     } else {
-        again.innerText = 'Want to try one more time?'
-            // constructing table with right answers
+        again.innerText = 'Want to try one more time?';
+        // constructing table with right answers
         for (let i = 0; i < names.length; i++) {
             let tdClass = userAnswers[i] == names[i] ? 'text-success' : 'text-danger';
             answersTable.innerHTML +=
@@ -264,12 +264,12 @@ next.addEventListener('click', e => {
             <td class= "tableData"><img src="${links[i]}"></td>
             <td class="${tdClass} align-middle">${userAnswers[i]}</td>
             <td class="align-middle">${names[i]}</td>
-            </tr>`
-        };
+            </tr>`;
+        }
 
         // showing how many right answers        
         final.innerHTML +=
-            `<p>Game ended! You guessed right ${score}/${names.length} times.</p>`
+            `<p>Game ended! You guessed right ${score}/${names.length} times.</p>`;
 
         // highscore logic
         if (score > highscore && score < names.length) {
@@ -281,12 +281,12 @@ next.addEventListener('click', e => {
         } else if (score == names.length) {
             //  nullify highscore = start new game
             highscore = 0;
-            again.innerText = 'Restart the game'
+            again.innerText = 'Restart the game';
             final.innerHTML +=
                 `<p>Congratulation! You earned a maximum amount of points and the game will be restarted.</p>`;
         } else if (highscore == 0) {
             final.innerHTML +=
-                `<p>Sorry, no highscore yet.</p>`
+                `<p>Sorry, no highscore yet.</p>`;
         }
 
         // hiding and showing elements
@@ -294,7 +294,7 @@ next.addEventListener('click', e => {
         finalWrapper.classList.remove('d-none');
     }
     next.classList.add('d-none');
-})
+});
 
 // starting a new game
 again.addEventListener('click', () => {
@@ -313,4 +313,4 @@ again.addEventListener('click', () => {
     final.innerHTML = '';
     answersTable.innerHTML = '';
 
-})
+});
