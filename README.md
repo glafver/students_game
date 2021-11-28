@@ -1,1 +1,1 @@
-https://compassionate-ramanujan-97cd5d.netlify.app/
+https://students-game.netlify.app/
