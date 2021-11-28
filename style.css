@@ -54,7 +54,7 @@ button {
 
 @media (min-width: 767.98px) {
     #studentImg {
-        max-width: 415px !important;
+        max-width: 400px !important;
     }
     table {
         width: 75% !important;
