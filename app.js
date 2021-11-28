@@ -222,10 +222,8 @@ answers.forEach(button => {
         if (e.target.innerText == names[index] && answerGiven == false) {
             // if user anwered correctly - upgrade the score
             score++;
-            answerGiven = true;
-        } else {
-            answerGiven = true;
         }
+        answerGiven = true;
         // show which buttons contained wrong and right answers
         answers.forEach(button => {
             button.classList.remove('btn-outline-dark');
@@ -267,7 +265,7 @@ next.addEventListener('click', e => {
             </tr>`;
         }
 
-        // showing how many right answers        
+        // showing how many right answers
         final.innerHTML +=
             `<p>Game ended! You guessed right ${score}/${names.length} times.</p>`;
 
