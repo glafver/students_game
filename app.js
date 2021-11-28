@@ -261,7 +261,7 @@ next.addEventListener('click', e => {
             let tdClass = userAnswers[i] == names[i] ? 'text-success' : 'text-danger';
             answersTable.innerHTML +=
                 `<tr>
-            <td class= "tableData"><img class= "img-fluid" src="${links[i]}"></td>
+            <td class= "tableData"><img src="${links[i]}"></td>
             <td class="${tdClass} align-middle">${userAnswers[i]}</td>
             <td class="align-middle">${names[i]}</td>
             </tr>`
